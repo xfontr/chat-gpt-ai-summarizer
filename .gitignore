@@ -5,3 +5,4 @@ public
 src/services/initAI.ts
 src/services/requestAI.ts
 src/stores/query.store.ts
+.env
