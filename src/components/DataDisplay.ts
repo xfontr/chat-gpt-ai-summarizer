@@ -1,6 +1,6 @@
 import HTMLAttributes from "../types/HTMLAttributes";
 import createElement from "../utils/createElement.js";
-import { setBaseClass } from "../utils/setBaseClass";
+import { setBaseClass } from "../utils/setBaseClass.js";
 
 interface DataDisplayProps extends HTMLAttributes<HTMLTextAreaElement> {}
 
