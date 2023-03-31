@@ -1,0 +1,16 @@
+{
+    "name": "summary-extension",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "openai": "^3.2.1",
+        "readline-sync": "^1.4.10"
+    },
+    "type": "module"
+}
