@@ -1,11 +1,12 @@
 import Spinner from "../components/Spinner.js";
-import { getApp } from "../index.js";
 import { queryBuildMiddleware } from "../stores/query.store.js";
 import parseDOMText from "../utils/parseDOMText.js";
 import { updateNode } from "../utils/renderUtils.js";
 import RequestCompleteView from "../views/RequestComplete.view.js";
+import useApp from "./useApp.js";
 
 const useAssistant = () => {
+  const { getApp } = useApp();
   const app = getApp();
 
   const executeQuery = async (): Promise<void> => {

@@ -1,4 +1,9 @@
+@use "../variables/spacings";
+
 .ai-textarea {
   width: 100%;
   height: 100%;
+  border: none;
+  border-radius: spacings.$rad-small;
+  max-height: 77%;
 }

@@ -1,12 +1,20 @@
 import HTMLAttributes from "../types/HTMLAttributes";
 import createElement from "../utils/createElement.js";
-import { setBaseClass } from "../utils/setBaseClass.js";
+import { baseSetBaseClass, setBaseClass } from "../utils/setBaseClass.js";
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
 
 const baseClass = setBaseClass("button");
 
-const Button = (props: ButtonProps = {}) =>
-  createElement("button", { className: baseClass, ...props });
+const variants = {
+  fullWidth: `${baseClass}--full-width`,
+  iconOnly: `${baseClass}--icon-only`,
+};
+
+const Button = (props: ButtonProps = {}, variant?: keyof typeof variants) =>
+  createElement("button", {
+    className: `${baseClass} ${variants[variant] ? variants[variant] : ""}`,
+    ...props,
+  });
 
 export default Button;

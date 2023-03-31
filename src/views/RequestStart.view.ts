@@ -10,7 +10,7 @@ const RequestStartView = (): HTMLElement => {
 
   return appendChildren(
     view,
-    Button({ textContent: "Summarize", onclick: executeQuery })
+    Button({ textContent: "Summarize", onclick: executeQuery }, "fullWidth")
   );
 };
 
