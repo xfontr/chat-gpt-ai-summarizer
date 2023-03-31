@@ -4,7 +4,6 @@ import {
 } from "openai";
 import Message from "../utils/Message.js";
 
-const history: [string, string][] = [];
 let messages: CreateChatCompletionRequest["messages"] = [];
 
 export const messagesStore = () => {
@@ -21,27 +20,11 @@ export const messagesStore = () => {
     messages = [];
   };
 
-  const useMessages = () => ({
+  return () => ({
     getAllMessages,
     addMessage,
     resetMessages,
   });
-
-  const getAllHistory = (): typeof history => [...history];
-
-  const addHistory = (inputText: string, completionText: string) => {
-    history.push([inputText, completionText]);
-  };
-
-  const useHistory = () => ({
-    getAllHistory,
-    addHistory,
-  });
-
-  return {
-    useMessages,
-    useHistory,
-  };
 };
 
-export const { useHistory, useMessages } = messagesStore();
+export const useMessages = messagesStore();
