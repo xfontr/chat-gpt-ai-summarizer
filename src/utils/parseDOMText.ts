@@ -1,13 +1,14 @@
-import app, { getApp } from "../index.js";
-import { clearNode } from "./renderUtils.js";
+import useApp from "../hooks/useApp.js";
+import { clearNode, updateNode } from "./renderUtils.js";
 
 const parseDOMText = (): string => {
-  const appBackup = app.innerHTML;
-  clearNode(app);
+  const { unmount, mount } = useApp();
+
+  unmount();
 
   const content = document?.body?.textContent || "";
 
-  getApp().innerHTML = appBackup;
+  mount({ fromLastBackup: true });
 
   return content;
 };

@@ -4,10 +4,35 @@
 .ai-summarizer-app {
   position: absolute;
   top: spacings.$medium;
-  right: spacings.$medium;
+  right: 0;
+
   width: 19rem;
   height: 15rem;
+
   background-color: colors.$secondary;
   padding: spacings.$medium;
-  border-radius: spacings.$rad-small;
+  padding-right: calc(spacings.$medium * 2);
+  border-radius: spacings.$rad-small 0 0 spacings.$rad-small;
+
+  z-index: spacings.$primacy-max;
+
+  &__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: colors.$typography;
+    color: colors.$primary;
+    padding: spacings.$small;
+    padding-right: calc(spacings.$small * 2);
+    border-radius: spacings.$rad-small;
+    position: absolute;
+    top: 0;
+    left: -(spacings.$big);
+    z-index: spacings.$primacy-secondary;
+  }
+
+  &__content {
+    height: 100%;
+  }
 }
