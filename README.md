@@ -1,2 +1,3 @@
-# Vanilla JS App
-App built with JS vanilla, just for fun. Since it's a project made for fund, testing might be skipped.
+# Summarizer extension
+
+Semi-open source chrome extension that summarizes the page you are at.
