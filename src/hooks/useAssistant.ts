@@ -19,9 +19,10 @@ const useAssistant = () => {
       setResponseFormat,
     } = useQuery();
 
+    if (!rules) return;
     if (rules.maxLengthCount) setMaxLengthCount(rules.maxLengthCount);
     if (rules.responseMaxLength) setResponseMaxLength(rules.responseMaxLength);
-    if (rules.focusOn.length) setKeywords(rules.focusOn);
+    if (rules.focusOn?.length) setKeywords(rules.focusOn);
     if (rules.responseFormat) setResponseFormat(rules.responseFormat);
   };
 
@@ -35,9 +36,7 @@ const useAssistant = () => {
 
     const response = await aiRequestMiddleware(query);
 
-    setTimeout(() => {
-      updateNode(app, RequestCompleteView(query));
-    }, 500);
+    updateNode(app, RequestCompleteView(response));
   };
 
   return { executeQuery };

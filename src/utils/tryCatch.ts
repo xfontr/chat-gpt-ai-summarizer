@@ -1,7 +1,7 @@
-const tryCatch = async <T = unknown, E = any>(
+const tryCatch = async <T = unknown, E = unknown>(
   callback: Function,
   ...args: unknown[]
-): Promise<[T, E]> => {
+): Promise<[T | null, E | unknown]> => {
   try {
     const response = await callback(...args);
     return [response, null];
