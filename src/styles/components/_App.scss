@@ -6,8 +6,8 @@
   top: spacings.$medium;
   right: 0;
 
-  width: 19rem;
-  height: 15rem;
+  width: 21rem;
+  height: 21rem;
 
   background-color: colors.$secondary;
   padding: spacings.$medium;
@@ -17,18 +17,9 @@
   z-index: spacings.$primacy-max;
 
   &__close {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: colors.$typography;
-    color: colors.$primary;
-    padding: spacings.$small;
-    padding-right: calc(spacings.$small * 2);
-    border-radius: spacings.$rad-small;
     position: absolute;
     top: 0;
-    left: -(spacings.$big);
+    left: -2.7rem;
     z-index: spacings.$primacy-secondary;
   }
 

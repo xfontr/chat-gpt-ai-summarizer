@@ -1,6 +1,7 @@
 @use "../variables/spacings";
 
-.ai-request-complete {
+.ai-layout {
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: spacings.$medium;
