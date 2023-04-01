@@ -1,8 +1,8 @@
 import HTMLAttributes from "../types/HTMLAttributes";
 
-const createElement = (
+const createElement = <T extends HTMLElement>(
   name: keyof HTMLElementTagNameMap,
-  props: HTMLAttributes
+  props: HTMLAttributes<T> = {}
 ): HTMLElement => {
   const newElement = document.createElement(name);
 

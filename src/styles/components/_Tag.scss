@@ -1,0 +1,15 @@
+@use "../variables/colors";
+@use "../variables/spacings";
+
+.ai-tag {
+  border: 1px solid colors.$typography;
+  background-color: colors.$primary;
+  width: fit-content;
+  height: fit-content;
+  padding: 0 spacings.$small;
+  border-radius: spacings.$rad-small;
+
+  display: flex;
+  align-items: center;
+  gap: spacings.$small;
+}

@@ -7,6 +7,7 @@
   padding: 0.8rem 1.8rem;
   border-radius: spacings.$rad-small;
   border: 1px solid transparent;
+  height: fit-content;
   width: fit-content;
 
   font-weight: bold;
@@ -31,6 +32,11 @@
   }
 
   &--icon-only {
+    align-items: center;
+
+    width: spacings.$big;
+    height: spacings.$big;
     padding: 0;
+    line-height: 0;
   }
 }

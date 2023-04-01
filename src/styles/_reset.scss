@@ -17,13 +17,16 @@ body {
 button {
   cursor: pointer;
   user-select: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
 button,
 input,
 textarea {
   font: inherit;
-  outline: none;
+  outline: transparent;
 }
 
 ul {
@@ -51,6 +54,12 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+input[type="radio"] {
+  width: fit-content;
+  margin: 0;
+  padding: 0;
 }
 
 dialog {

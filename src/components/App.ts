@@ -8,15 +8,17 @@ const baseClass = setBaseClass("summarizer-app");
 const App = (): HTMLElement => {
   const app = createElement("div", { className: baseClass });
   const content = createElement("div", { className: `${baseClass}__content` });
-  const close = createElement("div", {
+  // const close = createElement("div", {
+  //   className: `${baseClass}__close`,
+  // });
+  const close = Button({
+    textContent: "X",
     className: `${baseClass}__close`,
+    onclick: () => (app.outerHTML = ""),
+    variant: "iconOnly",
   });
-  const closeButton = Button(
-    { textContent: "X", onclick: () => (app.outerHTML = "") },
-    "iconOnly"
-  );
 
-  appendChildren(close, closeButton);
+  // appendChildren(close, closeButton);
 
   return appendChildren(app, content, close);
 };

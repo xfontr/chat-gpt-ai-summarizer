@@ -2,7 +2,9 @@ import HTMLAttributes from "../types/HTMLAttributes";
 import createElement from "../utils/createElement.js";
 import { baseSetBaseClass, setBaseClass } from "../utils/setBaseClass.js";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  variant?: keyof typeof variants;
+}
 
 const baseClass = setBaseClass("button");
 
@@ -11,10 +13,12 @@ const variants = {
   iconOnly: `${baseClass}--icon-only`,
 };
 
-const Button = (props: ButtonProps = {}, variant?: keyof typeof variants) =>
+const Button = ({ variant, ...rest }: ButtonProps = {}) =>
   createElement("button", {
-    className: `${baseClass} ${variants[variant] ? variants[variant] : ""}`,
-    ...props,
+    ...rest,
+    className: `${baseClass} ${variants[variant] ? variants[variant] : ""} ${
+      rest.className
+    }`,
   });
 
 export default Button;

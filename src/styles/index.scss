@@ -4,8 +4,13 @@
 @use "./components/App";
 @use "./components/Button";
 @use "./components/Spinner";
+@use "./components/FormField";
+@use "./components/QueryOptions";
+@use "./components/StackOptions";
+@use "./components/Tag";
 
 @use "./views/RequestComplete";
+@use "./views/Layout";
 
 @use "./variables/breakpoints";
 @use "./variables/colors";
