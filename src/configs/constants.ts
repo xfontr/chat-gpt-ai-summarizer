@@ -10,4 +10,6 @@ export const SUMMARY_MIN_LENGTH: Record<QueryMaxLengthCount, number> = {
 /** When changed, must update css selectors */
 export const CLASS_PREFIX = "ai";
 
-export default MODEL;
+export const ENDPOINTS = {
+  aiCompletion: "/completions",
+};
