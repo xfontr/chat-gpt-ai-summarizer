@@ -1,15 +1,18 @@
 import useApp from "../hooks/useApp.js";
 
-const parseDOMText = (): string => {
+const parseDOMText = (onlySelection: boolean): string => {
   const { unmount, mount } = useApp();
 
   unmount();
 
-  const content = document?.body?.textContent || "";
+  const content =
+    (onlySelection
+      ? window.getSelection()?.toString()
+      : document?.body?.innerText) || "";
 
   mount({ fromLastBackup: true });
 
-  return content;
+  return content.replaceAll(/\s/g, " ");
 };
 
 export default parseDOMText;

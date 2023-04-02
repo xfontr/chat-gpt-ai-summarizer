@@ -52,7 +52,7 @@ const queryStore = () => {
 
     baseQuery = `${baseQuery} The style of your response will have to be in ${responseFormat}.`;
 
-    query.query = `${baseQuery} The text I need you to summarize with the previous requirements is the following one:
+    query.query = `${baseQuery} The text I need you to summarize with the previous requirements is the combination of the previous messages I've sent you during this chat.
     ${query.pageContent}`;
   };
 

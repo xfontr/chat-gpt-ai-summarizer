@@ -1,11 +1,11 @@
-import { CreateChatCompletionRequest } from "openai";
 import { MODEL, TEMPERATURE } from "../configs/constants.js";
+import { ChatCompletionRequest as ICompletionRequest } from "../types/openai.js";
 
 const ChatCompletionRequest = (
-  allMessages: CreateChatCompletionRequest["messages"]
-): CreateChatCompletionRequest => ({
+  messages: ICompletionRequest["messages"]
+): ICompletionRequest => ({
   model: MODEL,
-  messages: allMessages,
+  messages,
   temperature: TEMPERATURE,
 });
 
