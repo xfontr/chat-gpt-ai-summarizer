@@ -7,6 +7,7 @@ export type Query = {
     focusOn: string[];
     maxLengthCount: QueryMaxLengthCount;
     responseFormat: ResponseFormat;
+    getFromSelection: boolean;
   };
   pageContent: string;
   query: string;

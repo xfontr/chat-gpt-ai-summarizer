@@ -1,6 +1,11 @@
 import Spinner from "../components/Spinner.js";
+import {
+  DEFAULT_PARSE,
+  MAX_QUERIES_PER_PAGE,
+  QUERY_MAX_LENGTH,
+} from "../configs/constants.js";
 import { aiRequestMiddleware } from "../services/requestAI.js";
-import { queryBuildMiddleware, useQuery } from "../stores/query.store.js";
+import { useQuery } from "../stores/query.store.js";
 import Query from "../types/Query.js";
 import parseDOMText from "../utils/parseDOMText.js";
 import { updateNode } from "../utils/renderUtils.js";
@@ -32,7 +37,19 @@ const useAssistant = () => {
     updateNode(app, Spinner());
     setRules(rules);
 
-    const query = queryBuildMiddleware(parseDOMText());
+    const DOMText = parseDOMText(rules?.getFromSelection ?? DEFAULT_PARSE);
+
+    const words = DOMText.split(" ");
+    const fragments = Math.ceil(words.length / QUERY_MAX_LENGTH);
+
+    const query = new Array(fragments)
+      .fill(QUERY_MAX_LENGTH)
+      .map((maxLength, index) =>
+        words.slice(index * maxLength, (index + 1) * maxLength).join(" ")
+      )
+      .slice(0, MAX_QUERIES_PER_PAGE) ?? [""];
+
+    if (!DOMText) return;
 
     const response = await aiRequestMiddleware(query);
 

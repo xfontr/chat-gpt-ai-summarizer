@@ -1,4 +1,4 @@
-import { ChatCompletionRequestMessage } from "openai";
+import { ChatCompletionRequestMessage } from "../types/openai";
 
 const Message = (
   role: ChatCompletionRequestMessage["role"],

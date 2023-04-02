@@ -1,8 +1,6 @@
-import {
-  ChatCompletionRequestMessage,
-  CreateChatCompletionRequest,
-} from "openai";
+import { CreateChatCompletionRequest } from "openai";
 import Message from "../utils/Message.js";
+import { ChatCompletionRequestMessage } from "../types/openai.js";
 
 let messages: CreateChatCompletionRequest["messages"] = [];
 
