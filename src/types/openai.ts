@@ -14,6 +14,11 @@ export type ChatCompletionRequest = {
 
 export type ChatCompletionResponse = {
   data: {
+    usage: {
+      prompt_tokens: number;
+      completion_tokens: number;
+      total_tokens: number;
+    };
     choices: [
       {
         message: {

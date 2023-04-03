@@ -5,34 +5,34 @@ import { $ } from "../utils/querySelector.js";
 import { setBaseClass } from "../utils/setBaseClass.js";
 import FormField from "./FormField.js";
 import { SUMMARY_MIN_LENGTH } from "../configs/constants.js";
-import { QueryMaxLengthCount } from "../types/Query.js";
-
-type QueryOptionsProps = {
-  handleForm: Function;
-};
+import { QueryMaxLengthCount, ResponseFormat } from "../types/Query.js";
+import { useQuery } from "../stores/query.store.js";
 
 const baseClass = setBaseClass("query-options");
 
-const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
-  const initialValues = handleForm();
+const QueryOptions = (): HTMLElement => {
+  const {
+    getQueryRules,
+    setResponseMaxLength,
+    setMaxLengthCount,
+    setResponseFormat
+  } = useQuery();
 
   const handleLengthCountChange = (count: QueryMaxLengthCount) => () => {
-    handleForm("maxLengthCount", count);
-
     $<HTMLInputElement>(
       `.${baseClass}__max-words`
     ).value = `${SUMMARY_MIN_LENGTH[count]}`;
 
-    handleForm("responseMaxLength", SUMMARY_MIN_LENGTH[count]);
+    setMaxLengthCount(count);
   };
 
   const queryOptions = createElement("form", {
     className: baseClass,
-    onsubmit: (event) => event.preventDefault(),
+    onsubmit: event => event.preventDefault()
   });
 
   const maxLengthField = createElement("div", {
-    className: `${baseClass}__max-length`,
+    className: `${baseClass}__max-length`
   });
 
   const maxQueryLength = FormField({
@@ -40,15 +40,16 @@ const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
     inputProps: {
       type: "number",
       className: `${baseClass}__max-words`,
-      defaultValue: initialValues["responseMaxLength"],
-      onchange: (event: ChangeEvent) => {
-        handleForm("responseMaxLength", event.currentTarget.value);
-      },
+      defaultValue: getQueryRules().responseMaxLength.toString(),
+      onchange: (event: Event) => {
+        setResponseMaxLength(+(event as ChangeEvent).currentTarget.value);
+      }
     },
+    variant: "fullWidth"
   });
 
   const maxLengthFieldRadio = createElement("div", {
-    className: `${baseClass}__radio-area ${baseClass}__radio-area--max-length`,
+    className: `${baseClass}__radio-area ${baseClass}__radio-area--max-length`
   });
 
   const maxLengthInWords = FormField({
@@ -56,10 +57,10 @@ const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
     inputProps: {
       type: "radio",
       name: "maxLengthCount",
-      defaultChecked: initialValues.maxLengthCount === "words",
-      onchange: handleLengthCountChange("words"),
+      defaultChecked: getQueryRules().maxLengthCount === "words",
+      onchange: () => handleLengthCountChange("words")
     },
-    variant: "radio",
+    variant: "radio"
   });
 
   const maxLengthInChars = FormField({
@@ -67,14 +68,14 @@ const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
     inputProps: {
       type: "radio",
       name: "maxLengthCount",
-      defaultChecked: initialValues.maxLengthCount === "characters",
-      onchange: handleLengthCountChange("characters"),
+      defaultChecked: getQueryRules().maxLengthCount === "characters",
+      onchange: handleLengthCountChange("characters")
     },
-    variant: "radio",
+    variant: "radio"
   });
 
   const formatField = createElement("div", {
-    className: `${baseClass}__radio-area`,
+    className: `${baseClass}__radio-area`
   });
 
   const listSummary = FormField({
@@ -82,12 +83,15 @@ const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
     inputProps: {
       type: "radio",
       name: "responseFormat",
-      defaultChecked: initialValues.responseFormat === "bulletPoints",
-      onchange: () => {
-        handleForm("responseFormat", "bulletPoints");
-      },
+      value: "bulletPoints",
+      defaultChecked: getQueryRules().responseFormat === "bulletPoints",
+      onchange: (event: Event) => {
+        setResponseFormat(
+          (event as ChangeEvent).currentTarget.value as ResponseFormat
+        );
+      }
     },
-    variant: "radio",
+    variant: "radio"
   });
 
   const regularSummary = FormField({
@@ -95,12 +99,15 @@ const QueryOptions = ({ handleForm }: QueryOptionsProps): HTMLElement => {
     inputProps: {
       type: "radio",
       name: "responseFormat",
-      defaultChecked: initialValues.responseFormat === "summary",
-      onchange: () => {
-        handleForm("responseFormat", "summary");
-      },
+      value: "summary",
+      defaultChecked: getQueryRules().responseFormat === "summary",
+      onchange: (event: Event) => {
+        setResponseFormat(
+          (event as ChangeEvent).currentTarget.value as ResponseFormat
+        );
+      }
     },
-    variant: "radio",
+    variant: "radio"
   });
 
   appendChildren(maxLengthFieldRadio, maxLengthInWords, maxLengthInChars);

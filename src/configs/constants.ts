@@ -1,10 +1,6 @@
-import Query, { QueryMaxLengthCount } from "../types/Query";
+import models from "../data/models";
+import { QueryMaxLengthCount } from "../types/Query";
 import { Temperature } from "../types/openai";
-
-const models = Object.freeze({
-  chat: "gpt-3.5-turbo",
-  completion: "text-davinci-003",
-});
 
 export const MODEL = models.chat;
 
@@ -15,8 +11,6 @@ export const SUMMARY_MIN_LENGTH: Record<QueryMaxLengthCount, number> = {
   words: 30,
 };
 
-export const DEFAULT_PARSE: Query["queryRules"]["getFromSelection"] = false;
-
 /** When changed, must update css selectors */
 export const CLASS_PREFIX = "ai";
 
@@ -25,6 +19,14 @@ export const ENDPOINTS = {
 };
 
 /** Count in words */
-export const QUERY_MAX_LENGTH: number = 1000;
+export const QUERY_MAX_LENGTH = 1_000;
 
-export const MAX_QUERIES_PER_PAGE: number = 2;
+export const MAX_QUERIES_PER_PAGE = 2;
+
+export const MAX_POSSIBLE_LENGTH = QUERY_MAX_LENGTH * MAX_QUERIES_PER_PAGE;
+
+export const AVAILABLE_TOKENS = 10_000;
+
+export const TOKENS_PER_WORD = 2.5;
+
+export const MINIMUM_TOKENS = 150;
