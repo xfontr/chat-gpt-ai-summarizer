@@ -1,8 +1,11 @@
 $primary: rgb(249, 252, 255);
 
-$secondary: rgb(231, 223, 198);
+$secondary: rgba(5, 23, 45, 0.3);
 
-$typography: rgb(11, 15, 19);
+$contrast--full: rgba(5, 23, 45, 1);
+$contrast: rgba(5, 23, 45, 0.7);
+
+$typography: rgb(2, 6, 11);
 $typography--lighter: rgb(34, 46, 57);
 
 $error: rgb(164, 66, 66);

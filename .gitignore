@@ -27,4 +27,7 @@ dist-ssr
 src/services/initAI.ts
 src/services/requestAI.ts
 src/stores/query.store.ts
+src/stores/tokens.store.ts
+src/services/encrypt.ts
 .env
+

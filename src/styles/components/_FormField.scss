@@ -2,6 +2,14 @@
 @use "../variables/spacings";
 
 .ai-form-field {
+  &--full-width {
+    width: 100%;
+  }
+
+  &--fit-content {
+    width: fit-content;
+  }
+
   &__input {
     padding: 0.8rem 0.8rem;
     background-color: colors.$secondary;
@@ -26,6 +34,7 @@
   &__label {
     display: flex;
     flex-direction: column;
+    gap: spacings.$small;
 
     &--radio {
       line-height: 0;

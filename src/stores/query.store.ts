@@ -8,6 +8,7 @@ const query: Query = {
     responseMaxLength: SUMMARY_MIN_LENGTH.words,
     maxLengthCount: "words",
     responseFormat: "summary",
+    getFromSelection: false,
   },
   query: "",
 };
@@ -36,13 +37,21 @@ const queryStore = () => {
     query.queryRules.focusOn = keywords;
   };
 
-  const buildQuery = (): void => {
+  const setQuerySource = (getFromSelection: boolean): void => {
+    query.queryRules.getFromSelection = getFromSelection;
+  };
+
+  const buildQuery = (onPreviousMessages?: boolean): void => {
     const maxLength = `${query.queryRules.responseMaxLength} ${query.queryRules.maxLengthCount}`;
     const keywords = query.queryRules.focusOn.join(", ");
     const responseFormat =
       query.queryRules.responseFormat === "bulletPoints"
         ? "bullet points (a list), which means I will need you to provide me with a list of the main points of the text"
         : "a regular text, so avoid doing lists or bullet points";
+    const textToSummarize = onPreviousMessages
+      ? "the combination of the previous messages I've sent you during this chat."
+      : `the following one:
+      ${query.pageContent}`;
 
     let baseQuery = `I want you to summarize me a text. Your response (the summary) must have a maximum of ${maxLength}.`;
 
@@ -52,8 +61,7 @@ const queryStore = () => {
 
     baseQuery = `${baseQuery} The style of your response will have to be in ${responseFormat}.`;
 
-    query.query = `${baseQuery} The text I need you to summarize with the previous requirements is the combination of the previous messages I've sent you during this chat.
-    ${query.pageContent}`;
+    query.query = `${baseQuery} The text I need you to summarize with the previous requirements is ${textToSummarize}`;
   };
 
   const getQuery = (): string => query.query;
@@ -64,6 +72,7 @@ const queryStore = () => {
     setMaxLengthCount,
     setPageContent,
     setResponseFormat,
+    setQuerySource,
     buildQuery,
     getQuery,
     getQueryRules,
@@ -77,6 +86,6 @@ export const queryBuildMiddleware = (pageContent: string): string => {
   const { buildQuery, getQuery, setPageContent } = useQuery();
 
   setPageContent(pageContent);
-  buildQuery();
+  buildQuery(!!!pageContent);
   return getQuery();
 };

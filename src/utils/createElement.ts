@@ -6,9 +6,11 @@ const createElement = <T extends HTMLElement>(
 ): HTMLElement => {
   const newElement = document.createElement(name);
 
-  Object.keys(props).forEach((key: keyof HTMLAttributes) => {
+  Object.keys(props).forEach(key => {
     /** Disgusting workaround for the read-only props, so this is a potential bug house */
-    (newElement[key] as any) = props[key];
+    (newElement[key as keyof HTMLAttributes] as any) = props[
+      key as keyof HTMLAttributes
+    ];
   });
 
   return newElement;

@@ -1,4 +1,5 @@
 import App from "../components/App.js";
+import { useTokens } from "../stores/tokens.store.js";
 import injectHTML from "../utils/injectHTML.js";
 import { $ } from "../utils/querySelector.js";
 import { updateNode } from "../utils/renderUtils.js";
@@ -42,12 +43,20 @@ const useApp = () => {
     version: number = contentHistory.length - 1
   ): HTMLElement => contentHistory[version] ?? getApp();
 
+  const init = async () => {
+    const { init } = useTokens();
+
+    await init();
+    mount();
+  };
+
   return {
     getOuterApp,
     getApp,
     getBackup,
     unmount,
     mount,
+    init,
   };
 };
 

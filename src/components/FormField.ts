@@ -12,24 +12,28 @@ interface FormFieldProps extends HTMLAttributes<HTMLDivElement> {
 const baseClass = setBaseClass("form-field");
 
 const variants = {
-  radio: (block: string) => `${block}--radio`,
+  radio: `${baseClass}__label--radio`,
+  fullWidth: `${baseClass}--full-width`,
+  fitContent: `${baseClass}--fit-content`
 };
 
 const FormField = ({
   label,
   inputProps,
-  variant,
+  variant
 }: FormFieldProps): HTMLElement => {
-  const field = createElement("div", { className: baseClass });
-  const inputLabel = createElement("label", {
-    className: `${baseClass}__label ${
-      variants[variant] ? variants[variant](`${baseClass}__label`) : ""
-    }`,
-    textContent: label,
+  const field = createElement("div", {
+    className: `${baseClass} ${(variant && variants[variant]) ?? ""}`
   });
+
+  const inputLabel = createElement("label", {
+    className: `${baseClass}__label ${(variant && variants[variant]) ?? ""}`,
+    textContent: label
+  });
+
   const input = createElement("input", {
     ...inputProps,
-    className: `${baseClass}__input ${inputProps.className ?? ""}`,
+    className: `${baseClass}__input ${inputProps.className ?? ""}`
   });
 
   appendChildren(inputLabel, input);
