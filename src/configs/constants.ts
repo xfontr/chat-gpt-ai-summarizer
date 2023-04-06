@@ -21,9 +21,17 @@ export const ENDPOINTS = {
 /** Count in words */
 export const QUERY_MAX_LENGTH = 1_000;
 
+/** 1.300 words */
+export const CLOSE_TO_QUERY_MAX_LENGTH = QUERY_MAX_LENGTH + 300;
+
 export const MAX_QUERIES_PER_PAGE = 2;
 
+/** 2.000 */
 export const MAX_POSSIBLE_LENGTH = QUERY_MAX_LENGTH * MAX_QUERIES_PER_PAGE;
+
+export const MIN_POSSIBLE_LENGTH = 700;
+
+export const QUERY_LENGTH_TO_PAGE_RATIO = 0.33;
 
 export const AVAILABLE_TOKENS = 10_000;
 

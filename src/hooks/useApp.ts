@@ -14,11 +14,8 @@ type MountOptions = Partial<{
 const contentHistory: HTMLElement[] = [];
 
 const useApp = () => {
-  const getOuterApp = (): HTMLElement =>
-    $(setBaseClass("summarizer-app", true)) as HTMLElement;
-
   const getApp = (): HTMLElement =>
-    $(setBaseClass("summarizer-app__content", true)) as HTMLElement;
+    $(setBaseClass("summarizer-app", true)) as HTMLElement;
 
   const mount = ({
     inject = true,
@@ -27,16 +24,15 @@ const useApp = () => {
   }: MountOptions = {}): ReturnType<typeof App> => {
     const app = App();
 
-    if (inject) injectHTML(app);
+    if (inject) injectHTML(fromLastBackup ? getBackup() : app);
     if (setContent) updateNode(getApp(), setContent);
-    if (fromLastBackup) updateNode(getApp(), getBackup());
 
     return app;
   };
 
   const unmount = (): void => {
     contentHistory.push(getApp());
-    getOuterApp().remove();
+    getApp().remove();
   };
 
   const getBackup = (
@@ -44,14 +40,12 @@ const useApp = () => {
   ): HTMLElement => contentHistory[version] ?? getApp();
 
   const init = async () => {
-    const { init } = useTokens();
-
-    await init();
+    const { init: initTokens } = useTokens();
+    await initTokens();
     mount();
   };
 
   return {
-    getOuterApp,
     getApp,
     getBackup,
     unmount,

@@ -7,21 +7,41 @@ import { updateNode } from "../utils/renderUtils.js";
 import { setBaseClass } from "../utils/setBaseClass.js";
 import RequestStartView from "./RequestStart.view.js";
 
+type RequestResponseViewProps = {
+  response?: string;
+  hasError?: boolean;
+};
+
 const baseClass = setBaseClass("request-complete ai-layout");
 
-const RequestCompleteView = (response: string): HTMLElement => {
+const RequestCompleteView = ({
+  response,
+  hasError = false,
+}: RequestResponseViewProps): HTMLElement => {
   const { getApp } = useApp();
   const app = getApp();
 
   const view = createElement("div", { className: baseClass });
-  const baseHeader = createElement("header", {
-    className: "request-complete__header",
-  });
 
   const resetButton = Button({
     textContent: "Reset",
     onclick: () => updateNode(app, RequestStartView()),
     variant: "fullWidth",
+  });
+
+  if (hasError) {
+    return appendChildren(
+      view,
+      appendChildren(
+        createElement("div"),
+        createElement("span", { textContent: "Something went wrong" }),
+        resetButton
+      )
+    );
+  }
+
+  const baseHeader = createElement("header", {
+    className: "request-complete__header",
   });
 
   const header = appendChildren(baseHeader, resetButton);

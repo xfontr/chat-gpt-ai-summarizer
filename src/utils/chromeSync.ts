@@ -1,5 +1,7 @@
+import chrome from "../services/chrome";
+
 export const chromeSyncGet = async (key: string) =>
-  await window?.chrome?.storage.sync.get(key);
+  await chrome!.storage.sync.get(key);
 
 export const chromeSyncSet = async (key: string, value: string | number) =>
-  await window?.chrome?.storage.sync.set({ [key]: value });
+  await chrome!.storage.sync.set({ [key]: value });

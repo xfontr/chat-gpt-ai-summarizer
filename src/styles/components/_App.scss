@@ -2,24 +2,15 @@
 @use "../variables/spacings";
 
 .ai-summarizer-app {
-  position: fixed;
-  top: spacings.$medium;
-  right: 0;
-
   width: 400px;
   height: 540px;
 
-  background: rgba(5, 23, 45, 0.2);
-  border-radius: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%234e8397' fill-opacity='0.7' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  border: 2px solid black;
+
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(5, 23, 45, 0.3);
-  border-right: none;
-
-  padding: spacings.$medium;
-  padding-right: calc(spacings.$medium * 2);
-  border-radius: spacings.$rad-small 0 0 spacings.$rad-small;
 
   z-index: spacings.$primacy-max;
 
@@ -28,9 +19,5 @@
     top: 0;
     left: -2.7rem;
     z-index: spacings.$primacy-secondary;
-  }
-
-  &__content {
-    height: 100%;
   }
 }

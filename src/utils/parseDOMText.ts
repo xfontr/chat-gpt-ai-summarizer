@@ -10,7 +10,7 @@ const parseDOMText = (onlySelection: boolean): string => {
       ? window.getSelection()?.toString()
       : document?.body?.innerText) || "";
 
-  mount({ fromLastBackup: true });
+  mount({ fromLastBackup: true, inject: true });
 
   return content.replaceAll(/\s/g, " ");
 };

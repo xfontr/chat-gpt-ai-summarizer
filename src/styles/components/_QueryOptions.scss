@@ -1,14 +1,51 @@
 @use "../variables/spacings";
+@use "../variables/colors";
 
 .ai-query-options {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: spacings.$medium;
+
+  padding: 0.8rem 0.8rem;
+  background-color: colors.$secondary;
+  border: 1px solid rgba(11, 15, 19, 0.229);
+  border-radius: spacings.$rad-small;
+  width: 100%;
+  transition: 0.2s;
+
+  &__form {
+    padding: 0.6rem 0.6rem;
+    background-color: colors.$secondary;
+    border: 1px solid rgba(11, 15, 19, 0.229);
+    border-radius: spacings.$rad-small;
+    opacity: 0.7;
+  }
+
+  &__label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__radio-button {
+    display: none;
+
+    &:checked + .ai-query-options__label {
+      background-color: colors.$primary;
+      opacity: 1;
+    }
+  }
 
   &__max-length {
     display: flex;
     align-items: flex-end;
     gap: spacings.$small;
+    margin-top: spacings.$medium;
+
+    &:focus {
+      border-color: colors.$typography;
+    }
   }
 
   &__radio-area {
