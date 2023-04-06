@@ -17,6 +17,11 @@
     border-radius: spacings.$rad-small;
     width: 100%;
     transition: 0.2s;
+    color: colors.$primary;
+
+    &::placeholder {
+      color: colors.$primary--lighter;
+    }
 
     &:focus {
       border-color: colors.$typography;
@@ -29,12 +34,36 @@
     &--error:focus {
       border-color: colors.$error;
     }
+
+    &.ai-form-field--no-style {
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+    }
   }
 
   &__label {
     display: flex;
     flex-direction: column;
     gap: spacings.$small;
+
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    font-weight: bold;
+    color: colors.$typography--lighter;
+
+    & > * {
+      font-size: 1rem;
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: normal;
+
+      &:not(input) {
+        color: colors.$typography;
+      }
+    }
 
     &--radio {
       line-height: 0;

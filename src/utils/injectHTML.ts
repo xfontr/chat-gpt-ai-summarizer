@@ -1,7 +1,8 @@
 import appendChildren from "./appendChildren.js";
+import { $ } from "./querySelector.js";
 
 const injectHTML = (node: HTMLElement): void => {
-  appendChildren(document.body, node);
+  appendChildren($(".root"), node);
 };
 
 export default injectHTML;

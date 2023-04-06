@@ -1,5 +1,6 @@
 import Spinner from "../components/Spinner.js";
 import {
+  CLOSE_TO_QUERY_MAX_LENGTH,
   MAX_QUERIES_PER_PAGE,
   QUERY_MAX_LENGTH,
 } from "../configs/constants.js";
@@ -8,6 +9,7 @@ import { useQuery } from "../stores/query.store.js";
 import { useTokens } from "../stores/tokens.store.js";
 import Query from "../types/Query.js";
 import parseDOMText from "../utils/parseDOMText.js";
+import queryBodyLength from "../utils/queryBodyLength.js";
 import { updateNode } from "../utils/renderUtils.js";
 import RequestCompleteView from "../views/RequestComplete.view.js";
 import useApp from "./useApp.js";
@@ -46,32 +48,43 @@ const useAssistant = () => {
 
     const DOMText = parseDOMText(!!getFromSelection);
 
-    const words = DOMText.split(" ");
+    const pageWords = DOMText.split(" ");
 
-    if (!hasEnoughTokens(words.length)) {
+    const actualQueryBody = queryBodyLength(pageWords.length, DOMText);
+    const words = actualQueryBody.split(" ");
+
+    if (!hasEnoughTokens(words.length) || !words || !words.length) {
+      updateNode(app, RequestCompleteView({ hasError: true }));
       return;
     }
 
     updateNode(app, Spinner());
 
-    const fragments = Math.ceil(words.length / QUERY_MAX_LENGTH);
+    const fragments =
+      words.length < CLOSE_TO_QUERY_MAX_LENGTH
+        ? words.length
+        : Math.ceil(words.length / QUERY_MAX_LENGTH);
 
     const query = new Array(fragments)
       .fill(QUERY_MAX_LENGTH)
       .map((maxLength, index) =>
         words.slice(index * maxLength, (index + 1) * maxLength).join(" ")
       )
-      .slice(0, MAX_QUERIES_PER_PAGE) ?? [""];
+      .slice(0, MAX_QUERIES_PER_PAGE);
 
-    if (!DOMText) return;
+    if (!query || !query.length || !query[0]) {
+      updateNode(app, RequestCompleteView({ hasError: true }));
+      return;
+    }
 
     const response = await aiRequestMiddleware(query);
 
     if (typeof response !== "string") {
+      updateNode(app, RequestCompleteView({ hasError: true }));
       return;
     }
 
-    updateNode(app, RequestCompleteView(response));
+    updateNode(app, RequestCompleteView({ response }));
   };
 
   return { executeQuery };

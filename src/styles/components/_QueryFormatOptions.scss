@@ -1,0 +1,46 @@
+@use "../variables/colors";
+@use "../variables/spacings";
+
+.ai-query-format {
+  &__form {
+    width: 50%;
+  }
+
+  &__label {
+    width: 100%;
+    cursor: pointer;
+    background-color: colors.$secondary;
+    border: 1px solid rgba(11, 15, 19, 0.229);
+    display: block;
+    color: colors.$primary--lighter;
+    border-radius: spacings.$rad-big;
+    height: fit-content;
+    line-height: 0;
+    padding: spacings.$medium spacings.$big;
+
+    display: flex;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__radio-area {
+    display: flex;
+    gap: spacings.$medium;
+
+    &--max-length {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: spacings.$small;
+      gap: spacings.$small;
+    }
+  }
+
+  &__radio-button {
+    display: none;
+
+    &:checked + .ai-query-format__label {
+      background-color: colors.$secondary--darker;
+      color: colors.$primary;
+    }
+  }
+}

@@ -2,12 +2,16 @@
   "name": "Summarizer",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab", "tabs"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["dist/assets/index-8719ce5e.js"],
-      "css": ["dist/css/index.css"]
+      "js": ["dummy.js"]
     }
-  ]
+  ],
+  "action": {
+    "default_title": "Summarizer",
+    "default_popup": "popup.html",
+    "default_area": "navbar"
+  }
 }

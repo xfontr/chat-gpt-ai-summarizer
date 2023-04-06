@@ -1,5 +1,42 @@
-.ai-request-start__footer {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
+@use "../variables/spacings";
+
+.ai-request-start {
+  &__options {
+    width: 100%;
+    height: 350px;
+    border-radius: 0 0 13% 13%;
+
+    background-image: linear-gradient(
+      to top,
+      rgba(78, 131, 151, 1),
+      #468ea0,
+      #3e99a6,
+      #37a3aa,
+      #34aeac,
+      #37b5ac,
+      #3dbcaa,
+      #46c3a8,
+      #4ec8a6,
+      #58cca3,
+      #62d1a0,
+      #6cd59c
+    );
+
+    padding: 1.5rem;
+    box-shadow: 10px 10px 30px 10px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    gap: spacings.$medium;
+  }
+
+  &__footer {
+    width: 100%;
+    bottom: 0;
+    padding: 0.5rem 3rem 1.5rem 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: spacings.$medium;
+  }
 }

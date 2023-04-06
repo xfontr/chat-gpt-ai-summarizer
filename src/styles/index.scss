@@ -6,8 +6,10 @@
 @use "./components/Spinner";
 @use "./components/FormField";
 @use "./components/QueryOptions";
+@use "./components/QueryFormatOptions";
 @use "./components/StackOptions";
 @use "./components/Tag";
+@use "./components/Header";
 
 @use "./views/RequestStart";
 @use "./views/RequestComplete";

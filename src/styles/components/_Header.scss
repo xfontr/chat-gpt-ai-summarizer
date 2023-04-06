@@ -1,0 +1,29 @@
+@use "../variables/spacings";
+@use "../variables/colors";
+
+.ai-main-container {
+  height: 100%;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: colors.$typography;
+    color: colors.$primary;
+    padding: spacings.$small;
+  }
+
+  &__info {
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    padding-right: 2px;
+    font-size: 0.7rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    border: 1px solid white;
+  }
+}
