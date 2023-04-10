@@ -69,4 +69,13 @@ export const openLink = (event: any) => {
   chrome!.tabs.create({ url: event.target?.href });
 };
 
+export const getEnvironmentKey = (key: string, callback: Function) => {
+  chrome!.runtime.sendMessage(
+    { type: "getEnvironmentKey", key },
+    (response) => {
+      callback(response);
+    }
+  );
+};
+
 export default chrome;

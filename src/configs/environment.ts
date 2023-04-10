@@ -1,7 +1,19 @@
+import { getEnvironmentKey } from "../services/chrome";
+
 const ENVIRONMENT = {
-  openaiApiKey: import.meta.env.VITE_AI_API_KEY,
-  openaiApiURL: import.meta.env.VITE_AI_API_URL,
-  secret: import.meta.env.VITE_AI_SECRET,
+  openaiApiKey: "",
+  openaiApiURL: "https://api.openai.com/v1/chat",
+  secret: "",
+};
+
+export const setEnvironment = () => {
+  getEnvironmentKey("API_KEY", (response: string) => {
+    ENVIRONMENT.openaiApiKey = response;
+  });
+
+  getEnvironmentKey("SECRET", (response: string) => {
+    ENVIRONMENT.secret = response;
+  });
 };
 
 export default ENVIRONMENT;

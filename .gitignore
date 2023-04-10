@@ -32,3 +32,5 @@ src/stores/query.store.ts
 src/stores/tokens.store.ts
 src/services/encrypt.ts
 .env
+
+manifest.json
