@@ -3,6 +3,7 @@ import ChangeEvent from "../types/ChangeEvent";
 import { ResponseFormat } from "../types/Query";
 import appendChildren from "../utils/appendChildren";
 import createElement from "../utils/createElement";
+import { $ } from "../utils/querySelector";
 import { setBaseClass } from "../utils/setBaseClass";
 import FormField from "./FormField";
 
@@ -34,6 +35,8 @@ const QueryFormatOptions = () => {
         setResponseFormat(
           (event as ChangeEvent).currentTarget.value as ResponseFormat
         );
+        $(".ai-query-options").style.opacity = "0.65";
+        $(".ai-query-options__max-words").setAttribute("disabled", "true");
       },
     },
     variant: "radio",
@@ -58,6 +61,8 @@ const QueryFormatOptions = () => {
         setResponseFormat(
           (event as ChangeEvent).currentTarget.value as ResponseFormat
         );
+        $(".ai-query-options").style.opacity = "1";
+        $(".ai-query-options__max-words").removeAttribute("disabled");
       },
     },
     variant: "radio",
