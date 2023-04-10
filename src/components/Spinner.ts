@@ -8,7 +8,7 @@ const Spinner = (): HTMLElement => {
   const center = createElement("div", { className: `${baseClass}-container` });
   const spinner = createElement("div", { className: baseClass });
   const estimatedTime = createElement("p", {
-    textContent: "Time est.: 1 min.",
+    textContent: "Please, wait 😀 Est. time: 1 min.",
   });
 
   return appendChildren(center, spinner, estimatedTime);

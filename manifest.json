@@ -1,5 +1,6 @@
 {
-  "name": "Summarizer",
+  "name": "AI Summarizer",
+  "description": "ChatGPT-3.5 powered tool to summarize any website you are one",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab", "tabs", "scripting"],
@@ -15,6 +16,6 @@
     "default_area": "navbar"
   },
   "icons": {
-    "128": "favicon.png"
+    "128": "128.png"
   }
 }
