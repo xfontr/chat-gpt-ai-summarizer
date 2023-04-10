@@ -8,3 +8,7 @@ export const clearNode = (node: HTMLElement) => {
 
 export const updateNode = (node: HTMLElement, update: HTMLElement) =>
   appendChildren(clearNode(node), update);
+
+export const replaceNode = (baseNode: HTMLElement, node: HTMLElement) => {
+  baseNode.replaceWith(node);
+};

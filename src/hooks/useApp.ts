@@ -1,4 +1,5 @@
 import App from "../components/App.js";
+import { useApiKey } from "../stores/apiKey.store.js";
 import { useTokens } from "../stores/tokens.store.js";
 import injectHTML from "../utils/injectHTML.js";
 import { $ } from "../utils/querySelector.js";
@@ -41,7 +42,11 @@ const useApp = () => {
 
   const init = async () => {
     const { init: initTokens } = useTokens();
+    const { init: initApiKey } = useApiKey();
+
     await initTokens();
+    await initApiKey();
+
     mount();
   };
 

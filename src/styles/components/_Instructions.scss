@@ -1,0 +1,21 @@
+@use "../variables/spacings";
+@use "../variables/colors";
+
+.ai-instructions {
+  padding: spacings.$medium;
+  border-radius: spacings.$rad-small;
+  background-color: colors.$secondary;
+
+  margin: 0;
+  margin-bottom: spacings.$medium;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$medium;
+
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}

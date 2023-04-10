@@ -1,3 +1,4 @@
+import Layout from "../components/Layout";
 import useApp from "../hooks/useApp";
 import createElement from "../utils/createElement";
 import { updateNode } from "../utils/renderUtils";
@@ -13,13 +14,15 @@ const chrome = ((): typeof globalThis.chrome | void => {
 
   updateNode(
     getApp(),
-    createElement("span", {
-      textContent: "Something went really, really wrong",
+    Layout({
+      addChildren: createElement("span", {
+        textContent: "Something went really, really wrong",
+      }),
     })
   );
 })();
 
-export const browserAction = async <T = unknown>(action: Function) => {
+export const getWindowText = async () => {
   const [tab] = await chrome!.tabs.query({
     active: true,
     currentWindow: true,
@@ -28,15 +31,42 @@ export const browserAction = async <T = unknown>(action: Function) => {
   let result;
 
   try {
-    [{ result }] = await chrome!.scripting.executeScript<any[], T>({
+    [{ result }] = await chrome!.scripting.executeScript<any[], string | null>({
       target: { tabId: tab.id! },
-      func: () => action.bind(this).call(),
+      func: () => document.body.innerText,
     });
   } catch (e) {
     return;
   }
 
   return result;
+};
+
+export const getWindowSelection = async () => {
+  const [tab] = await chrome!.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
+
+  let result;
+
+  try {
+    [{ result }] = await chrome!.scripting.executeScript<
+      any[],
+      string | undefined
+    >({
+      target: { tabId: tab.id! },
+      func: () => getSelection()?.toString(),
+    });
+  } catch (e) {
+    return;
+  }
+
+  return result;
+};
+
+export const openLink = (event: any) => {
+  chrome!.tabs.create({ url: event.target?.href });
 };
 
 export default chrome;

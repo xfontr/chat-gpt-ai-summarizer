@@ -8,37 +8,40 @@ import { SUMMARY_MIN_LENGTH } from "../configs/constants.js";
 import { QueryMaxLengthCount } from "../types/Query.js";
 import { useQuery } from "../stores/query.store.js";
 import { limitInputLength, restrictLetters } from "../utils/form.utils.js";
+import { query } from "../views/RequestStart.view.js";
 
 type QueryOptionsProps<T = unknown> = {
-  handler?: () => T;
+  handler?: (...args: any[]) => T;
 };
 
 const maxLengthFieldMaxLength = {
   words: 3,
-  characters: 4
+  characters: 4,
 };
 
 const baseClass = setBaseClass("query-options");
 
 const QueryOptions = <T = unknown>({
-  handler
+  handler,
 }: QueryOptionsProps<T>): HTMLElement => {
   const { getQueryRules, setResponseMaxLength, setMaxLengthCount } = useQuery();
 
-  const callHandler = (): T | undefined => handler && handler();
+  const callHandler = (...args: any[]): T | undefined =>
+    handler && handler(...args);
 
   const handleLengthCountChange = (count: QueryMaxLengthCount) => () => {
-    $<HTMLInputElement>(`.${baseClass}__max-words`).value = SUMMARY_MIN_LENGTH[
-      count
-    ].toString();
+    $<HTMLInputElement>(`.${baseClass}__max-words`).value =
+      SUMMARY_MIN_LENGTH[count].toString();
 
     setMaxLengthCount(count);
-    callHandler();
+    setResponseMaxLength(SUMMARY_MIN_LENGTH[count]);
+
+    query().then((res) => callHandler(res));
   };
 
   const queryOptions = createElement("form", {
     className: baseClass,
-    onsubmit: event => event.preventDefault()
+    onsubmit: (event) => event.preventDefault(),
   });
 
   const maxQueryLength = FormField({
@@ -49,16 +52,16 @@ const QueryOptions = <T = unknown>({
       defaultValue: getQueryRules().responseMaxLength.toString(),
       onchange: (event: Event) => {
         setResponseMaxLength(+(event as ChangeEvent).currentTarget.value);
-        callHandler();
+        query().then((res) => callHandler(res));
       },
-      oninput: event => {
+      oninput: (event) => {
         limitInputLength(
           maxLengthFieldMaxLength[getQueryRules().maxLengthCount]
         )(event);
         restrictLetters(event);
-      }
+      },
     },
-    variant: "noStyle"
+    variant: "noStyle",
   });
 
   const maxLengthInWords = FormField({
@@ -66,8 +69,8 @@ const QueryOptions = <T = unknown>({
     addChildren: [
       createElement("span", {
         textContent: "Words",
-        className: `${baseClass}__label`
-      })
+        className: `${baseClass}__label`,
+      }),
     ],
     className: `${baseClass}__form`,
     inputProps: {
@@ -75,9 +78,9 @@ const QueryOptions = <T = unknown>({
       type: "radio",
       name: "maxLengthCount",
       defaultChecked: getQueryRules().maxLengthCount === "words",
-      onchange: () => handleLengthCountChange("words")
+      onclick: handleLengthCountChange("words"),
     },
-    variant: "radio"
+    variant: "radio",
   });
 
   const maxLengthInChars = FormField({
@@ -85,8 +88,8 @@ const QueryOptions = <T = unknown>({
     addChildren: [
       createElement("span", {
         textContent: "Characters",
-        className: `${baseClass}__label`
-      })
+        className: `${baseClass}__label`,
+      }),
     ],
     className: `${baseClass}__form`,
     inputProps: {
@@ -94,9 +97,9 @@ const QueryOptions = <T = unknown>({
       type: "radio",
       name: "maxLengthCount",
       defaultChecked: getQueryRules().maxLengthCount === "characters",
-      onchange: handleLengthCountChange("characters")
+      onclick: handleLengthCountChange("characters"),
     },
-    variant: "radio"
+    variant: "radio",
   });
 
   return appendChildren(

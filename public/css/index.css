@@ -4,6 +4,10 @@
   font-size: 16px;
 }
 
+p {
+  margin: 0;
+}
+
 body {
   margin: 0;
   font-family: manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
@@ -67,7 +71,7 @@ dialog {
 
 .root {
   width: 400px;
-  height: 540px;
+  height: 560px;
 }
 
 .ai-textarea {
@@ -75,7 +79,7 @@ dialog {
   height: 100%;
   border: none;
   border-radius: 0.3rem;
-  max-height: 84%;
+  max-height: 85%;
   background: transparent;
   color: rgb(2, 6, 11);
   line-height: 1.5;
@@ -83,7 +87,7 @@ dialog {
 
 .ai-summarizer-app {
   width: 400px;
-  height: 540px;
+  height: 560px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%234e8397' fill-opacity='0.7' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
   border: 2px solid black;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -101,7 +105,7 @@ dialog {
 .ai-button {
   display: flex;
   justify-content: center;
-  padding: 0.8rem 1.8rem;
+  padding: 0.65rem 1.6rem;
   border-radius: 0.3rem;
   border: 1px solid rgb(5, 23, 45);
   height: fit-content;
@@ -132,6 +136,12 @@ dialog {
 }
 .ai-button:disabled {
   opacity: 0.7;
+}
+.ai-button--text-only {
+  padding-left: 0;
+  padding-right: 0;
+  background: none;
+  border: none;
 }
 
 .ai-spinner {
@@ -169,7 +179,7 @@ dialog {
   width: fit-content;
 }
 .ai-form-field__input {
-  padding: 0.8rem 0.8rem;
+  padding: 0.65rem 0.8rem;
   background-color: rgba(5, 23, 45, 0.3);
   border: 1px solid rgba(11, 15, 19, 0.229);
   border-radius: 0.3rem;
@@ -232,25 +242,23 @@ dialog {
   width: 100%;
   transition: 0.2s;
 }
-.ai-query-options__form {
+.ai-query-options__label {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+  background-color: rgba(249, 252, 255, 0.4);
   padding: 0.6rem 0.6rem;
   background-color: rgba(5, 23, 45, 0.3);
   border: 1px solid rgba(11, 15, 19, 0.229);
   border-radius: 0.3rem;
   opacity: 0.7;
 }
-.ai-query-options__label {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  transition: 0.3s ease-in-out;
-}
 .ai-query-options__radio-button {
   display: none;
 }
 .ai-query-options__radio-button:checked + .ai-query-options__label {
-  background-color: rgb(249, 252, 255);
-  opacity: 1;
+  background-color: rgba(5, 23, 45, 0.6);
 }
 .ai-query-options__max-length {
   display: flex;
@@ -351,6 +359,9 @@ dialog {
   color: rgb(249, 252, 255);
   padding: 0.5rem;
 }
+.ai-main-container__add-tokens {
+  color: rgb(249, 252, 255);
+}
 .ai-main-container__info {
   cursor: pointer;
   width: 1rem;
@@ -363,6 +374,22 @@ dialog {
   align-items: center;
   font-style: italic;
   border: 1px solid white;
+}
+
+.ai-instructions {
+  padding: 1rem;
+  border-radius: 0.3rem;
+  background-color: rgba(5, 23, 45, 0.3);
+  margin: 0;
+  margin-bottom: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ai-instructions li {
+  padding: 0;
+  margin: 0;
 }
 
 .ai-request-start__options {
@@ -384,11 +411,22 @@ dialog {
   flex-direction: column;
   gap: 1rem;
 }
+.ai-request-start__token-cost {
+  font-size: 0.7rem;
+}
+.ai-request-start__submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .ai-request-complete {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
+  height: 93%;
 }
 
 .ai-layout {
@@ -396,6 +434,29 @@ dialog {
   flex-direction: column;
   gap: 1rem;
   position: relative;
+}
+
+.ai-api-key {
+  padding: 1rem;
+}
+.ai-api-key__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.ai-api-key__intro {
+  margin-bottom: 1rem;
+}
+.ai-api-key__outro {
+  margin-top: 1rem;
+}
+.ai-api-key__cancel {
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+.button--contrast {
+  color: rgb(2, 6, 11);
 }
 
 /*# sourceMappingURL=index.css.map */

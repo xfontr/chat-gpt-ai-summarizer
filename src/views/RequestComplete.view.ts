@@ -1,5 +1,6 @@
 import Button from "../components/Button.js";
 import DataDisplay from "../components/DataDisplay.js";
+import Layout from "../components/Layout.js";
 import useApp from "../hooks/useApp.js";
 import appendChildren from "../utils/appendChildren.js";
 import createElement from "../utils/createElement.js";
@@ -25,7 +26,7 @@ const RequestCompleteView = ({
 
   const resetButton = Button({
     textContent: "Reset",
-    onclick: () => updateNode(app, RequestStartView()),
+    onclick: () => updateNode(app, Layout({ addChildren: RequestStartView() })),
     variant: "fullWidth",
   });
 
@@ -48,7 +49,7 @@ const RequestCompleteView = ({
 
   const dataDisplay = DataDisplay({ defaultValue: response });
 
-  appendChildren(view, header, dataDisplay);
+  appendChildren(view, dataDisplay, header);
 
   return view;
 };

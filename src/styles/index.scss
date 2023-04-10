@@ -10,10 +10,12 @@
 @use "./components/StackOptions";
 @use "./components/Tag";
 @use "./components/Header";
+@use "./components/Instructions";
 
 @use "./views/RequestStart";
 @use "./views/RequestComplete";
 @use "./views/Layout";
+@use "./views/ApiKey";
 
 @use "./variables/breakpoints";
 @use "./variables/colors";

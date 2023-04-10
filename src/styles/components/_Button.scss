@@ -4,7 +4,7 @@
 .ai-button {
   display: flex;
   justify-content: center;
-  padding: 0.8rem 1.8rem;
+  padding: 0.65rem 1.6rem;
   border-radius: spacings.$rad-small;
   border: 1px solid colors.$contrast--full;
   height: fit-content;
@@ -42,5 +42,12 @@
 
   &:disabled {
     opacity: 0.7;
+  }
+
+  &--text-only {
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+    border: none;
   }
 }

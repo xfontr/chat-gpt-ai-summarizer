@@ -16,6 +16,8 @@ export const CLASS_PREFIX = "ai";
 
 export const ENDPOINTS = {
   aiCompletion: "/completions",
+  apiKey: "https://platform.openai.com/account/api-keys",
+  verifyApiKey: "https://api.openai.com/v1/engines",
 };
 
 /** Count in words */

@@ -13,6 +13,10 @@
     padding: spacings.$small;
   }
 
+  &__add-tokens {
+    color: colors.$primary;
+  }
+
   &__info {
     cursor: pointer;
     width: 1rem;
