@@ -13,5 +13,8 @@
     "default_title": "Summarizer",
     "default_popup": "popup.html",
     "default_area": "navbar"
+  },
+  "icons": {
+    "128": "favicon.png"
   }
 }

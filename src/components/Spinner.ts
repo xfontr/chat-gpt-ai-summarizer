@@ -7,8 +7,11 @@ const baseClass = setBaseClass("spinner");
 const Spinner = (): HTMLElement => {
   const center = createElement("div", { className: `${baseClass}-container` });
   const spinner = createElement("div", { className: baseClass });
+  const estimatedTime = createElement("p", {
+    textContent: "Time est.: 1 min.",
+  });
 
-  return appendChildren(center, spinner);
+  return appendChildren(center, spinner, estimatedTime);
 };
 
 export default Spinner;

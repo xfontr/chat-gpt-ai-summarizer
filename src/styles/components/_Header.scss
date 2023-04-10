@@ -31,3 +31,10 @@
     border: 1px solid white;
   }
 }
+
+.ai-main-container__token-info {
+  display: flex;
+  gap: spacings.$small;
+  align-items: center;
+  width: 100%;
+}

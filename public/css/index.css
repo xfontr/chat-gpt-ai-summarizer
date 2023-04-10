@@ -376,6 +376,13 @@ dialog {
   border: 1px solid white;
 }
 
+.ai-main-container__token-info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+
 .ai-instructions {
   padding: 1rem;
   border-radius: 0.3rem;

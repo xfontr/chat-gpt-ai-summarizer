@@ -54,7 +54,7 @@ const Layout = ({ addChildren, ...rest }: LayoutProps): HTMLElement => {
     appendChildren(
       header,
       appendChildren(
-        createElement("div"),
+        createElement("div", { className: `${baseClass}__token-info` }),
         getApiKey() ? connectedToApiKey : tokensLeft,
         addTokens
       ),
