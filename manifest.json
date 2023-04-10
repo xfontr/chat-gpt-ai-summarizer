@@ -1,7 +1,7 @@
 {
   "name": "AI Summarizer",
   "description": "ChatGPT-3.5 powered tool to summarize any website you are one",
-  "version": "1.0",
+  "version": "0.0.0.1",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab", "tabs", "scripting"],
   "content_scripts": [
