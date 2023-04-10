@@ -17,15 +17,15 @@ let inputValue = "";
 const StackOptions = ({ stack }: StackOptionsProps): HTMLElement => {
   const stackOptions = createElement("div", { className: baseClass });
   const tagList = createElement("div", {
-    className: `${baseClass}__tags`
+    className: `${baseClass}__tags`,
   });
   const noTagsMessage = createElement("span", {
     textContent: 'Write a keyword and press "add"',
-    className: `${baseClass}__tags--empty`
+    className: `${baseClass}__tags--empty`,
   });
 
   const deleteItem = (item: string) => () => {
-    const position = stack.findIndex(stackItem => stackItem === item);
+    const position = stack.findIndex((stackItem) => stackItem === item);
     stack.splice(position, 1);
     if (!stack.length && noTagsMessage) noTagsMessage.style.display = "block";
   };
@@ -42,14 +42,14 @@ const StackOptions = ({ stack }: StackOptionsProps): HTMLElement => {
       tagList,
       Tag({
         textContent: inputValue,
-        onClose: deleteItem(inputValue)
+        onClose: deleteItem(inputValue),
       })
     );
   };
 
   const stackOptionsForm = createElement("form", {
     className: `${baseClass}__form`,
-    onsubmit: handleSubmit
+    onsubmit: handleSubmit,
   });
 
   const input = FormField({
@@ -57,24 +57,25 @@ const StackOptions = ({ stack }: StackOptionsProps): HTMLElement => {
     inputProps: {
       type: "text",
       onchange: (event: Event) => {
-        inputValue = (event as ChangeEvent).currentTarget.value;
+        inputValue = (event as ChangeEvent).currentTarget.value.trim();
       },
-      placeholder: "Inflation"
+      placeholder: "Inflation",
     },
-    variant: "fullWidth"
+    variant: "fullWidth",
   });
 
   const button = Button({
-    textContent: "Add"
+    textContent: "Add",
+    type: "submit",
   });
 
   const renderStack = () => {
     if (stack.length) noTagsMessage.remove();
 
-    return stack.map(item =>
+    return stack.map((item) =>
       Tag({
         textContent: item,
-        onClose: deleteItem(item)
+        onClose: deleteItem(item),
       })
     );
   };

@@ -1,18 +1,13 @@
-import useApp from "../hooks/useApp.js";
+import { getWindowSelection, getWindowText } from "../services/chrome.js";
 
-const parseDOMText = (onlySelection: boolean): string => {
-  const { unmount, mount } = useApp();
+const parseDOMText = async (): Promise<string> => {
+  const selectedContent = await getWindowSelection();
 
-  unmount();
+  if (selectedContent) return selectedContent.replaceAll(/\s/g, " ");
 
-  const content =
-    (onlySelection
-      ? window.getSelection()?.toString()
-      : document?.body?.innerText) || "";
+  const windowContent = await getWindowText();
 
-  mount({ fromLastBackup: true, inject: true });
-
-  return content.replaceAll(/\s/g, " ");
+  return windowContent?.replaceAll(/\s/g, " ") ?? "";
 };
 
 export default parseDOMText;

@@ -39,4 +39,15 @@
     flex-direction: column;
     gap: spacings.$medium;
   }
+
+  &__token-cost {
+    font-size: 0.7rem;
+  }
+
+  &__submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

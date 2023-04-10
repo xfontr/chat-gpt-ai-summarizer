@@ -1,0 +1,29 @@
+@use "../variables/spacings";
+@use "../variables/colors";
+
+.ai-api-key {
+  padding: spacings.$medium;
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacings.$medium;
+  }
+
+  &__intro {
+    margin-bottom: spacings.$medium;
+  }
+
+  &__outro {
+    margin-top: spacings.$medium;
+  }
+
+  &__cancel {
+    margin-top: spacings.$medium;
+    text-decoration: underline;
+  }
+}
+
+.button--contrast {
+  color: colors.$typography;
+}

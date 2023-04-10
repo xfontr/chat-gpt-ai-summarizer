@@ -15,7 +15,7 @@ const queryBodyLength = (pageLength: number, body: string): string => {
 
   const limit = maxLimit > MIN_POSSIBLE_LENGTH ? maxLimit : MIN_POSSIBLE_LENGTH;
 
-  return updatedBody.slice(0, limit);
+  return updatedBody.split(" ").slice(0, limit).join(" ");
 };
 
 export default queryBodyLength;

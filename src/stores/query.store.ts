@@ -59,7 +59,7 @@ const queryStore = () => {
       ? `${baseQuery} While summarizing, you'll have to focus on the following keywords: ${keywords}.`
       : baseQuery;
 
-    baseQuery = `${baseQuery} The style of your response will have to be in ${responseFormat}.`;
+    baseQuery = `${baseQuery} The style of your response will have to be in ${responseFormat}. The language of your reply should be the same as the text you are summarizing (for example: if the text is in Spanish, your answer will have to be in Spanish). Lastly, the text I will provide you may or may not be complete. If you find it's not complete and there's information you need to provide a good summary, feel free to fill the gaps with your knowledge, but only if strictly necessary.`;
 
     query.query = `${baseQuery} The text I need you to summarize with the previous requirements is ${textToSummarize}`;
   };
@@ -87,5 +87,6 @@ export const queryBuildMiddleware = (pageContent: string): string => {
 
   setPageContent(pageContent);
   buildQuery(!!!pageContent);
+
   return getQuery();
 };

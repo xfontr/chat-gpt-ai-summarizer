@@ -12,6 +12,7 @@ dist
 public
 dist-ssr
 *.local
+public
 
 # Editor directories and files
 .vscode/*
@@ -31,4 +32,3 @@ src/stores/query.store.ts
 src/stores/tokens.store.ts
 src/services/encrypt.ts
 .env
-

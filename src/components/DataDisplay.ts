@@ -7,6 +7,10 @@ interface DataDisplayProps extends HTMLAttributes<HTMLTextAreaElement> {}
 const baseClass = setBaseClass("textarea");
 
 const DataDisplay = (props: DataDisplayProps): HTMLElement =>
-  createElement("textarea", { className: baseClass, ...props });
+  createElement<HTMLTextAreaElement>("textarea", {
+    className: baseClass,
+    readOnly: true,
+    ...props,
+  });
 
 export default DataDisplay;

@@ -1,3 +1,4 @@
+import Layout from "../components/Layout.js";
 import Spinner from "../components/Spinner.js";
 import {
   CLOSE_TO_QUERY_MAX_LENGTH,
@@ -5,6 +6,7 @@ import {
   QUERY_MAX_LENGTH,
 } from "../configs/constants.js";
 import { aiRequestMiddleware } from "../services/requestAI.js";
+import { useApiKey } from "../stores/apiKey.store.js";
 import { useQuery } from "../stores/query.store.js";
 import { useTokens } from "../stores/tokens.store.js";
 import Query from "../types/Query.js";
@@ -43,18 +45,26 @@ const useAssistant = () => {
     rules: Partial<Query["queryRules"]>
   ): Promise<void> => {
     const { hasEnoughTokens } = useTokens();
+    const { getApiKey } = useApiKey();
 
-    const { getFromSelection } = setRules(rules);
+    setRules(rules);
 
-    const DOMText = parseDOMText(!!getFromSelection);
+    const DOMText = await parseDOMText();
 
     const pageWords = DOMText.split(" ");
 
     const actualQueryBody = queryBodyLength(pageWords.length, DOMText);
     const words = actualQueryBody.split(" ");
 
-    if (!hasEnoughTokens(words.length) || !words || !words.length) {
-      updateNode(app, RequestCompleteView({ hasError: true }));
+    if (
+      (!getApiKey() && !hasEnoughTokens(words.length)) ||
+      !words ||
+      !words.length
+    ) {
+      updateNode(
+        app,
+        Layout({ addChildren: RequestCompleteView({ hasError: true }) })
+      );
       return;
     }
 
@@ -62,29 +72,38 @@ const useAssistant = () => {
 
     const fragments =
       words.length < CLOSE_TO_QUERY_MAX_LENGTH
-        ? words.length
+        ? 1
         : Math.ceil(words.length / QUERY_MAX_LENGTH);
 
-    const query = new Array(fragments)
-      .fill(QUERY_MAX_LENGTH)
-      .map((maxLength, index) =>
-        words.slice(index * maxLength, (index + 1) * maxLength).join(" ")
-      )
-      .slice(0, MAX_QUERIES_PER_PAGE);
+    const query =
+      fragments === 1
+        ? [words.join(" ")]
+        : new Array(fragments)
+            .fill(QUERY_MAX_LENGTH)
+            .map((maxLength, index) =>
+              words.slice(index * maxLength, (index + 1) * maxLength).join(" ")
+            )
+            .slice(0, MAX_QUERIES_PER_PAGE);
 
     if (!query || !query.length || !query[0]) {
-      updateNode(app, RequestCompleteView({ hasError: true }));
+      updateNode(
+        app,
+        Layout({ addChildren: RequestCompleteView({ hasError: true }) })
+      );
       return;
     }
 
     const response = await aiRequestMiddleware(query);
 
     if (typeof response !== "string") {
-      updateNode(app, RequestCompleteView({ hasError: true }));
+      updateNode(
+        app,
+        Layout({ addChildren: RequestCompleteView({ hasError: true }) })
+      );
       return;
     }
 
-    updateNode(app, RequestCompleteView({ response }));
+    updateNode(app, Layout({ addChildren: RequestCompleteView({ response }) }));
   };
 
   return { executeQuery };

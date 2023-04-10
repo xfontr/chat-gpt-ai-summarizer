@@ -8,6 +8,10 @@
   font-size: 16px;
 }
 
+p {
+  margin: 0;
+}
+
 body {
   margin: 0;
   font-family: manrope, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -72,5 +76,5 @@ dialog {
 
 .root {
   width: 400px;
-  height: 540px;
+  height: 560px;
 }
